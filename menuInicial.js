@@ -2,7 +2,7 @@
 const prompt = require('prompt-sync')()
 
 // Modularização das funções
-const {listarContatos} = require('./funcaoListar')
+const {funcaoListar} = require('./funcaoListar')
 const {adicionar_editar_Contato} = require('./funcaoAdicionar')
 const {excluirContato} = require('./funcaoExcluir')
 
@@ -34,19 +34,19 @@ function rodarMenuInicial(){
 
     switch(perguntaInicial){
         case 1:
-            adicionar_editar_Contato(prompt,contatos,listarContatos,1)
+            adicionar_editar_Contato(prompt,contatos,funcaoListar,1)
             rodarMenuInicial()
         break
         case 2:
-            listarContatos(contatos)
+            funcaoListar(contatos)
             rodarMenuInicial()
         break
         case 3:
-            adicionar_editar_Contato(prompt,contatos,listarContatos,2)
+            adicionar_editar_Contato(prompt,contatos,funcaoListar,2)
             rodarMenuInicial()
         break
         case 4:
-            excluirContato(prompt,contatos,listarContatos)
+            excluirContato(prompt,contatos,funcaoListar)
             rodarMenuInicial()
         break
         case 5:

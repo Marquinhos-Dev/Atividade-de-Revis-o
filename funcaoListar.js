@@ -1,13 +1,13 @@
 
-function listarContatos(contatos) {
+function funcaoListar(array) {
 
-  if(contatos.length == 0){
+  if(array.length == 0){
     console.log(`\n--> Ainda não há contatos registrados.`)
   } else{
-    contatos.forEach(contato => {
-      console.log(`ID: ${contato.ID} - Nome: ${contato.nome}, Telefone: ${contato.telefone}, Email: ${contato.email}`);
+    array.forEach(variavel => {
+      console.log(`ID: ${variavel.ID} - Nome: ${variavel.nome}, Telefone: ${variavel.telefone}, Email: ${variavel.email}`);
     });
   }
 }
 
-module.exports = { listarContatos }
+module.exports = { funcaoListar }
