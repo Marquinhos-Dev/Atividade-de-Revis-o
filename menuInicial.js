@@ -7,9 +7,9 @@ const {adicionar_editar_Contato} = require('./funcaoAdicionar')
 const {excluirContato} = require('./funcaoExcluir')
 
 let contatos = [
-    { nome: 'Alice', telefone: '1234-5678', email: 'alice@example.com' },
-    { nome: 'Bob', telefone: '8765-4321', email: 'bob@example.com' },
-    { nome: 'Carol', telefone: '5678-1234', email: 'carol@example.com' }
+    {ID: 1, nome: 'Alice', telefone: '1234-5678', email: 'alice@example.com' },
+    {ID: 2, nome: 'Bob', telefone: '8765-4321', email: 'bob@example.com' },
+    {ID: 3, nome: 'Carol', telefone: '5678-1234', email: 'carol@example.com' }
 ]
 
 rodarMenuInicial()
@@ -30,9 +30,11 @@ function rodarMenuInicial(){
 
     let perguntaInicial = parseInt(prompt('--> Escolha uma opção: '))
 
+    console.log(``)
+
     switch(perguntaInicial){
         case 1:
-            adicionar_editar_Contato(prompt,contatos,1)
+            adicionar_editar_Contato(prompt,contatos,listarContatos,1)
             rodarMenuInicial()
         break
         case 2:
