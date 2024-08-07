@@ -1,40 +1,13 @@
 
-function excluirContato(prompt,contatos,listarContatos){
+let array = require('./contatos')
 
-    if(contatos.length == 0){
+function funcaoExcluir(index){
 
-        console.log(`\n--> Ainda não há contatos registrados.`)
+    index = array.findIndex(verificar => verificar.nome === index)
 
-    } else{
+    array.splice(index,1)
 
-        listarContatos(contatos)
-
-        console.log()
-
-        let nomeIndex = prompt(`Digite o nome do contato que deseja excluir: `)
-
-        console.log()
-
-        let index = contatos.findIndex(contato => contato.nome == nomeIndex)
-
-        if(index < 0){
-
-            console.log(`--> Digite um nome válido!\n`)
-
-            excluirContato(prompt,contatos,listarContatos)
-        }
-
-        if(prompt(`Deseja mesmo excluir o contato?(Digite 'Sim'): `) != 'Sim'){
-
-            return console.log(`\n--> Exclusão cancelada!`)
-
-        } else{
-
-            contatos.splice(index,1)
-
-            console.log(`\n--> Contato excluído com sucesso!`)
-        }
-    }
+    console.log(`\n--> Contato removido com sucesso!`)
 }
 
-module.exports = {excluirContato}
+module.exports = {funcaoExcluir}

@@ -3,14 +3,11 @@ const prompt = require('prompt-sync')()
 
 // Modularização das funções
 const {funcaoListar} = require('./funcaoListar')
-const {adicionar_editar_Contato} = require('./funcaoAdicionar')
-const {excluirContato} = require('./funcaoExcluir')
+const {funcaoAdicionar} = require('./funcaoAdicionar')
+const {funcaoExcluir} = require('./funcaoExcluir')
+const {funcaoEditar} = require('./funcaoEditar')
 
-let contatos = [
-    {ID: 1, nome: 'Alice', telefone: '1234-5678', email: 'alice@example.com' },
-    {ID: 2, nome: 'Bob', telefone: '8765-4321', email: 'bob@example.com' },
-    {ID: 3, nome: 'Carol', telefone: '5678-1234', email: 'carol@example.com' }
-]
+let contatos = require('./contatos')
 
 rodarMenuInicial()
 
@@ -30,30 +27,87 @@ function rodarMenuInicial(){
 
     let perguntaInicial = parseInt(prompt('--> Escolha uma opção: '))
 
-    console.log(``)
+    let nome,email,telefone,index,adicionar
+    let telefones = []
 
     switch(perguntaInicial){
         case 1:
-            adicionar_editar_Contato(prompt,contatos,funcaoListar,1)
+
+            nome = prompt(`Digite o nome do contato: `)
+            email = prompt(`Digite o email do contato: `)
+            
+            do{
+                telefone = prompt('Digite um telefone para o contato: ')
+                telefones.push(telefone)
+                adicionar = prompt('Deseja adicionar mais telefones?(Digite s/n): ')
+
+            } while(adicionar == 's')
+
+            funcaoAdicionar(nome,email,telefones)
+
             rodarMenuInicial()
+
         break
         case 2:
-            funcaoListar(contatos)
+
+            funcaoListar()
             rodarMenuInicial()
+
         break
         case 3:
-            adicionar_editar_Contato(prompt,contatos,funcaoListar,2)
+
+            funcaoListar()
+
+            console.log()
+
+            index = prompt('Digite o nome do contato que deseja alterar: ')
+
+            if(contatos.find(verificar => verificar.nome == index) == undefined){
+
+                console.log(`\n--> Digite um nome válido!`)
+
+                rodarMenuInicial()
+            }
+
+            nome = prompt(`Digite o nome do contato: `)
+            email = prompt(`Digite o email do contato: `)
+            
+            do{
+                telefone = prompt('Digite um telefone para o contato: ')
+                telefones.push(telefone)
+                adicionar = prompt('Deseja adicionar mais telefones?(Digite s/n): ')
+
+            } while(adicionar == 's')
+
+            funcaoEditar(index,nome,email,telefones)
+
             rodarMenuInicial()
+
         break
         case 4:
-            excluirContato(prompt,contatos,funcaoListar)
+
+            funcaoListar()
+
+            console.log()
+
+            index = prompt('Digite o nome do contato que deseja excluir: ')
+
+            if(contatos.find(verificar => verificar.nome == index) == undefined){
+
+                console.log(`\n--> Digite um nome válido!`)
+
+                rodarMenuInicial()
+            }
+
+            funcaoExcluir(index)
+
             rodarMenuInicial()
         break
         case 5:
-            console.log(`--> Saindo...`)
+            console.log(`\n--> Saindo...`)
         break
         default:
-            console.log(`--> Escolha uma opção válida!`)
+            console.log(`\n--> Escolha uma opção válida!`)
             rodarMenuInicial()
         break
     }
